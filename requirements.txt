@@ -1,5 +1,3 @@
-tensorflow
-google-api-python-client
 oauth2client
 pillow
 face_recognition
