@@ -4,7 +4,7 @@ oauth2client
 pillow
 face_recognition
 click
-scipy
+scipy>=1.4.1
 scikit-image
 six
-opencv-python
+opencv-python-headless==4.2.0.32
