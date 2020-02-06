@@ -22,14 +22,23 @@ obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 biden_image = face_recognition.load_image_file("biden.jpg")
 biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
-leo_image = face_recognition.load_image_file("/Users/pacjin/development/personal/ai/image_rec/photo_processed/leo_photos/leo_1.png")
+leo_image = face_recognition.load_image_file("./photo_processed/leo_photos/leo_1.png")
 leo_face_encoding = face_recognition.face_encodings(leo_image)[0]
 
-nancy_image = face_recognition.load_image_file("/Users/pacjin/development/personal/ai/image_rec/photo_processed/leo_photos/nancy_1.png")
+nancy_image = face_recognition.load_image_file("./photo_processed/leo_photos/nancy_1.png")
 nancy_face_encoding = face_recognition.face_encodings(nancy_image)[0]
 
-vineet_image = face_recognition.load_image_file("/Users/pacjin/development/personal/ai/image_rec/photo_processed/vineet_photos/vineet_1.jpg")
+vineet_image = face_recognition.load_image_file("./photo_processed/vineet_photos/vineet_1.jpg")
 vineet_face_encoding = face_recognition.face_encodings(vineet_image)[0]
+
+adrianna_image = face_recognition.load_image_file("./photo_processed/vineet_photos/Adriana.jpg")
+adrianna_face_encoding = face_recognition.face_encodings(adrianna_image)[0]
+
+gail_image = face_recognition.load_image_file("./photo_processed/vineet_photos/gail.jpg")
+gail_face_encoding = face_recognition.face_encodings(gail_image)[0]
+
+amanda_image = face_recognition.load_image_file("./photo_processed/vineet_photos/Amanda.jpg")
+amanda_face_encoding = face_recognition.face_encodings(amanda_image)[0]
 
 
 # Create arrays of known face encodings and their names
@@ -38,14 +47,18 @@ known_face_encodings = [
     biden_face_encoding,
     leo_face_encoding,
     nancy_face_encoding,
-    vineet_face_encoding
+    vineet_face_encoding,
+    adrianna_face_encoding,
+    gail_face_encoding
 ]
 known_face_names = [
     "Barack Obama",
     "Joe Biden",
-    "Liang (Leo) Jin - software magician",
+    "Leo - Alpha Labs",
     "Nancy Jin",
-    "Vineet Malholtra - Digital Venture Leader"
+    "Vineet - Digital Venture Leader",
+    "Adriana - Strategic Initiatives Leader",
+    "Gail - Chief Digital Officer"
 ]
 
 # Initialize some variables

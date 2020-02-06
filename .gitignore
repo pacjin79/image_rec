@@ -1,9 +1,5 @@
 venv
 .idea
 .vscode
-photo_processed/
-photo_recognizable/
-photo_unrecognizable/
-photos/
 client_secret.json
 credentials.json
