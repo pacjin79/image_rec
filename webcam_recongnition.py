@@ -18,6 +18,9 @@ video_capture = cv2.VideoCapture(0)
 obama_image = face_recognition.load_image_file("obama.jpg")
 obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
+mf_image = face_recognition.load_image_file("mf.png")
+mf_face_encoding = face_recognition.face_encodings(mf_image)[0]
+
 # Load a second sample picture and learn how to recognize it.
 biden_image = face_recognition.load_image_file("biden.jpg")
 biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
@@ -44,6 +47,7 @@ amanda_face_encoding = face_recognition.face_encodings(amanda_image)[0]
 # Create arrays of known face encodings and their names
 known_face_encodings = [
     obama_face_encoding,
+    mf_face_encoding,
     biden_face_encoding,
     leo_face_encoding,
     nancy_face_encoding,
@@ -53,12 +57,46 @@ known_face_encodings = [
 ]
 known_face_names = [
     "Barack Obama",
+    "Mike Fortuna",
     "Joe Biden",
-    "Leo - Alpha Labs",
+    "Leo",
     "Nancy Jin",
-    "Vineet - Digital Venture Leader",
-    "Adriana - Strategic Initiatives Leader",
-    "Gail - Chief Digital Officer"
+    "Vineet",
+    "Adriana",
+    "Gail"
+]
+
+known_face_titles = [
+    "POTUS",
+    "Lead UI Engineer",
+    "Vice POTUS",
+    "Lead Engineer",
+    "Ninja",
+    "Digital Venture Leader",
+    "Strategic Initiatives Leader",
+    "Chief Digital Officer"
+]
+
+known_face_locations = [
+    "New York City",
+    "New York City",
+    "New York City",
+    "New York City",
+    "New York City",
+    "New York City",
+    "New York City",
+    "New York City",
+]
+
+known_face_emails = [
+    "barack.obama@mercer.com",
+    "michael.fortuna@mercer.com",
+    "joe.biden@mercer.com",
+    "leo.jin@mercer.com",
+    "nancy.jin@mercer.com",
+    "vineet.malhotra@mercer.com",
+    "adriana.xxx@mercer.com",
+    "gail.evans@mercer.com"
 ]
 
 # Initialize some variables
@@ -99,6 +137,9 @@ while True:
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
+                title = known_face_titles[best_match_index]
+                location = known_face_locations[best_match_index]
+                email = known_face_emails[best_match_index]
 
             face_names.append(name)
 
@@ -114,12 +155,16 @@ while True:
         left *= 4
 
         # Draw a box around the face
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+        cv2.rectangle(frame, (left, top), (right, bottom), (230, 104, 0), 1)
 
         # Draw a label with a name below the face
-        cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-        font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+        cv2.rectangle(frame, (left, bottom + 150), (right, bottom), (230, 104, 0), cv2.FILLED)
+        font = cv2.FONT_HERSHEY_TRIPLEX
+        cv2.putText(frame, name, (left + 20, bottom + 32), font, 1.0, (255, 255, 255), 2)
+        
+        cv2.putText(frame, title, (left + 20, bottom + 64), font, 0.65, (255, 255, 255), 1)
+        cv2.putText(frame, location, (left + 20, bottom + 96), font, 0.65, (255, 255, 255), 1)
+        cv2.putText(frame, email, (left + 20, bottom + 128), font, 0.5, (255, 255, 255), 1)
 
     # Display the resulting image
     cv2.imshow('Video', frame)
