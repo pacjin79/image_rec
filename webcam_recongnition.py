@@ -11,8 +11,13 @@ import numpy as np
 # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
 # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
+def nothing(x):
+    pass
 # Get a reference to webcam #0 (the default one)
+cv2.namedWindow('Warren AR', cv2.WINDOW_GUI_NORMAL)
 video_capture = cv2.VideoCapture(0)
+# create trackbars for color change
+
 
 # Load a sample picture and learn how to recognize it.
 obama_image = face_recognition.load_image_file("obama.jpg")
@@ -151,7 +156,7 @@ while True:
         cv2.putText(frame, face_info['email'], (left + 20, bottom + 128), font, 0.5, (255, 255, 255), 1)
 
     # Display the resulting image
-    cv2.imshow('Video', frame)
+    cv2.imshow('Warren AR', frame)
 
     # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
