@@ -8,5 +8,6 @@ camera.initialize()
 
 app = QApplication([])
 start_window = StartWindow(camera)
+# start_window.resize(2280, 1520)
 start_window.show()
 app.exit(app.exec_())
