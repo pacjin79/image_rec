@@ -46,32 +46,20 @@ amanda_face_encoding = face_recognition.face_encodings(amanda_image)[0]
 
 # Create arrays of known face encodings and their names
 known_face_encodings = [
-    obama_face_encoding,
-    mf_face_encoding,
-    biden_face_encoding,
     leo_face_encoding,
-    nancy_face_encoding,
     vineet_face_encoding,
     adrianna_face_encoding,
     gail_face_encoding
 ]
 known_face_names = [
-    "Barack Obama",
-    "Mike Fortuna",
-    "Joe Biden",
     "Leo",
-    "Nancy Jin",
     "Vineet",
     "Adriana",
     "Gail"
 ]
 
 known_face_titles = [
-    "POTUS",
-    "Lead UI Engineer",
-    "Vice POTUS",
-    "Lead Engineer",
-    "Ninja",
+    "Alpha Labs Leader",
     "Digital Venture Leader",
     "Strategic Initiatives Leader",
     "Chief Digital Officer"
@@ -81,19 +69,11 @@ known_face_locations = [
     "New York City",
     "New York City",
     "New York City",
-    "New York City",
-    "New York City",
-    "New York City",
-    "New York City",
-    "New York City",
+    "New York City"
 ]
 
 known_face_emails = [
-    "barack.obama@mercer.com",
-    "michael.fortuna@mercer.com",
-    "joe.biden@mercer.com",
     "leo.jin@mercer.com",
-    "nancy.jin@mercer.com",
     "vineet.malhotra@mercer.com",
     "adriana.xxx@mercer.com",
     "gail.evans@mercer.com"
@@ -125,7 +105,12 @@ while True:
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-            name = "Unknown"
+            face_info = {
+                'name': 'Unknown',
+                'title': 'Unknown',
+                'location': 'Unknown',
+                'email': 'Unknown'
+            }
 
             # # If a match was found in known_face_encodings, just use the first one.
             # if True in matches:
@@ -136,18 +121,17 @@ while True:
             face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
-                name = known_face_names[best_match_index]
-                title = known_face_titles[best_match_index]
-                location = known_face_locations[best_match_index]
-                email = known_face_emails[best_match_index]
-
-            face_names.append(name)
+                face_info['name'] = known_face_names[best_match_index]
+                face_info['title'] = known_face_titles[best_match_index]
+                face_info['location'] = known_face_locations[best_match_index]
+                face_info['email'] = known_face_emails[best_match_index]
+            face_names.append(face_info)
 
     process_this_frame = not process_this_frame
 
 
     # Display the results
-    for (top, right, bottom, left), name in zip(face_locations, face_names):
+    for (top, right, bottom, left), face_info in zip(face_locations, face_names):
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
         top *= 4
         right *= 4
@@ -160,11 +144,11 @@ while True:
         # Draw a label with a name below the face
         cv2.rectangle(frame, (left, bottom + 150), (right, bottom), (230, 104, 0), cv2.FILLED)
         font = cv2.FONT_HERSHEY_TRIPLEX
-        cv2.putText(frame, name, (left + 20, bottom + 32), font, 1.0, (255, 255, 255), 2)
+        cv2.putText(frame, face_info['name'], (left + 20, bottom + 32), font, 1.0, (255, 255, 255), 2)
         
-        cv2.putText(frame, title, (left + 20, bottom + 64), font, 0.65, (255, 255, 255), 1)
-        cv2.putText(frame, location, (left + 20, bottom + 96), font, 0.65, (255, 255, 255), 1)
-        cv2.putText(frame, email, (left + 20, bottom + 128), font, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, face_info['title'], (left + 20, bottom + 64), font, 0.65, (255, 255, 255), 1)
+        cv2.putText(frame, face_info['location'], (left + 20, bottom + 96), font, 0.65, (255, 255, 255), 1)
+        cv2.putText(frame, face_info['email'], (left + 20, bottom + 128), font, 0.5, (255, 255, 255), 1)
 
     # Display the resulting image
     cv2.imshow('Video', frame)
