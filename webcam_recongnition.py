@@ -226,16 +226,17 @@ while True:
         left *= 4
 
         # Draw a box around the face
-        cv2.rectangle(frame, (left, top), (right, bottom), (230, 104, 0), 0)
-
+        img = cv2.imread('./warren-logo.png',1)
+        
+        cv2.rectangle(frame, (left, top), (right, bottom), (230, 104, 0), 1)
+  
         # Draw a label with a name below the face
-        cv2.rectangle(frame, (left, bottom + 150), (right, bottom), (230, 104, 0), 0)
+        cv2.rectangle(frame, (left, bottom + 150), (right, bottom), (255, 255, 255), cv2.FILLED)
         font = cv2.FONT_HERSHEY_TRIPLEX
-        print('length = ', right - left)
-        cv2.putText(frame, face_info['name'], (left + 20, bottom + 32), font, 1.0, (255, 255, 255), 2)
-        cv2.putText(frame, face_info['title'], (left + 20, bottom + 64), font, 0.65, (255, 255, 255), 1)
-        cv2.putText(frame, face_info['location'], (left + 20, bottom + 96), font, 0.65, (255, 255, 255), 1)
-        cv2.putText(frame, face_info['email'], (left + 20, bottom + 128), font, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, face_info['name'], (left + 20, bottom + 32), font, 1.0, (101, 55, 0), 2)
+        cv2.putText(frame, face_info['title'], (left + 20, bottom + 64), font, 0.65, (176, 154, 128), 1)
+        cv2.putText(frame, face_info['location'], (left + 20, bottom + 96), font, 0.65, (128, 91, 47), 1)
+        cv2.putText(frame, face_info['email'], (left + 20, bottom + 128), font, 0.5, (128, 91, 47), 1)
 
     # Display the resulting image
     cv2.imshow('Warren AR', frame)
