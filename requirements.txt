@@ -5,4 +5,4 @@ click
 scipy>=1.4.1
 scikit-image
 six
-opencv-python-headless==4.2.0.32
+opencv-python-headless==4.8.1.78
